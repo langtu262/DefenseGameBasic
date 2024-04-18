@@ -1,53 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Player : MonoBehaviour
-{
-    [SerializeField] float atkRate;
-    private Animator anim;
-    private bool isAttack;
-    private float currentAttack;
-
-    // Start is called before the first frame update
-    private void Awake()
+namespace kienIT.DefenseGame {
+    public class Player : MonoBehaviour
     {
-        currentAttack = atkRate;
-    }
-    void Start()
-    {
-        anim = GetComponent<Animator>();
-    }
+        [SerializeField] float atkRate;
+        private Animator anim;
+        private bool isAttack;
+        private float currentAttack;
+        public float health = 100f;
+        public bool isDead;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0) && !isAttack)
+        // Start is called before the first frame update
+        private void Awake()
         {
-            if (anim != null) 
-            { 
-                anim.SetBool(Const.Attack_anim, true);
-                isAttack = true;
-            }
+            currentAttack = atkRate;
         }
-        if(currentAttack >= 0 )
+        void Start()
         {
-            currentAttack -= Time.deltaTime;
-            if (currentAttack <= 0 ) 
+            anim = GetComponent<Animator>();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            
+            if (Input.GetMouseButtonDown(0) && !isAttack)
             {
-                isAttack= false;
-                currentAttack = atkRate;
+                if (anim != null)
+                {
+                    anim.SetBool(Const.Attack_anim, true);
+                    isAttack = true;
+                }
+            }
+            if (currentAttack >= 0)
+            {
+                currentAttack -= Time.deltaTime;
+                if (currentAttack <= 0)
+                {
+                    isAttack = false;
+                    currentAttack = atkRate;
+                }
+            }
+
+        }
+        public void ResetAttack()
+        {
+            if (anim != null)
+            {
+                anim.SetBool(Const.Attack_anim, false);
+            }
+        }
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag(Const.EnemyWeapon_tag) && !isDead) 
+            {
+                anim.SetTrigger(Const.Dead_anim);
+                isDead = true;
             }
         }
 
     }
-    public void ResetAttack()
-    {
-        if (anim != null)
-        {
-            anim.SetBool(Const.Attack_anim, false);
-        }
-    }
-
-
 }
