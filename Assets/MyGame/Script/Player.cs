@@ -55,6 +55,7 @@ namespace kienIT.DefenseGame {
         {
             if (collision.CompareTag(Const.EnemyWeapon_tag) && !isDead) 
             {
+                Debug.Log("da va cham");
                 anim.SetTrigger(Const.Dead_anim);
                 isDead = true;
             }
