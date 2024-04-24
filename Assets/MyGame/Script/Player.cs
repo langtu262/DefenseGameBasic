@@ -57,6 +57,7 @@ namespace kienIT.DefenseGame {
             {
                 Debug.Log("da va cham");
                 anim.SetTrigger(Const.Dead_anim);
+                gameObject.layer = LayerMask.NameToLayer(Const.layerDead);
                 isDead = true;
             }
         }

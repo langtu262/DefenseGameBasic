@@ -11,5 +11,6 @@ namespace kienIT.DefenseGame
         public const string EnemyWeapon_tag = "EnemyWeapon";
         public const string PlayerWeapon_tag = "PlayerWeapon";
         public const string Enemy_tag = "Enemy";
+        public const string layerDead = "LayerDead";
     }
 }
