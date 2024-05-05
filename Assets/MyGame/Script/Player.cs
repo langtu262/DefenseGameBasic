@@ -31,7 +31,7 @@ namespace KienIT.Gameplay
         {
             Debug.Log(currenAttack);
 
-            if (Input.GetMouseButtonDown(0) && r_Anim != null && currenAttack <= 0)
+            if (Input.GetMouseButtonDown(0) && r_Anim != null && attacking == false)
             {
                 r_Anim.SetBool(idAttacking, true);
                 attacking = true;
@@ -41,6 +41,10 @@ namespace KienIT.Gameplay
             if (currenAttack > 0)
             {
                currenAttack = currenAttack - Time.deltaTime;
+                if(currenAttack < 0)
+                {
+                    attacking = false;
+                }
             }
         }
         public void ResetAttack()
