@@ -18,11 +18,11 @@ namespace KienIT.Gameplay
         // Update is called once per frame
         void Update()
         {
-           // if (player != null)
-            //{
-               // Debug.Log("da tim thay");
+            if (rb != null)
+            {
+                Debug.Log("da tim thay");
                 rb.velocity = new Vector2(-speedMove, rb.position.y);
-           // }
+            }
         }
     }
 }
